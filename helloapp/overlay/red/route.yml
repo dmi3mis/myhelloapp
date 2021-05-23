@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/host
+  value: red.apps.ocp4.baretest.ml
+- op: replace
+  path: /spec/to/name
+  value: red-hello

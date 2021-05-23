@@ -1,0 +1,4 @@
+- op: replace
+  path: /spec/output/to/name
+  value: green-hello:latest
+  

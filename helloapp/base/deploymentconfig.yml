@@ -1,0 +1,45 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: hello
+    app.kubernetes.io/component: hello
+    app.kubernetes.io/instance: hello
+  name: hello
+  namespace: hello
+  
+spec:
+  replicas: 1
+  selector:
+    app: hello
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: hello:latest
+        name: hello
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        resources: {}
+        env:
+        - name: COLOR
+          value: CHANGE_ME
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - hello
+      from:
+        kind: ImageStreamTag
+        name: hello:latest
+    type: ImageChange
